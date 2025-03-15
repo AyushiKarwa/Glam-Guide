@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLAM GUIDE - Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f1ebeb;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #0f0e0e;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #ccc;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #f7f4f4;
+            font-weight: bold;
+            font-size: 1rem;
+            display: block; 
+            padding: 10px 15px; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00; 
+            background-color: rgba(255, 204, 0, 0.2); 
+            border-radius: 5px; 
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; 
+            padding: 20px;
+            flex: 1; 
+        }
+
+        .service-block {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100%; 
+            height: 300px; 
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-direction: column; 
+        }
+        .service-block img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* Ensures the image fills the box while maintaining aspect ratio */
+            transition: opacity 0.3s;
+        }
+        
+
+        .service-block h2 {
+            margin: 0;
+            color: #f7fcf7;
+            z-index: 1;
+            transition: opacity 0.3s; 
+        }
+
+        .service-description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0; 
+            text-align: center;
+        }
+
+        .service-block:hover img,
+        .service-block:hover h2 {
+            opacity: 0; 
+        }
+
+        .service-block:hover .service-description {
+            opacity: 1; 
+        }
+
+        .click-here {
+            margin-top: auto; 
+            font-weight: bold; 
+            color: #0e7bf0; 
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GLAM GUIDE</h1>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="about.html">About us</a>
+        </nav>
+    </header>
+
+    <section class="services">
+        <div class="service-block">
+            <img src="services_outfit_generator.png" alt="Outfit Generator">
+            <h2>Outfit Generator</h2>
+            <div class="service-description">
+                <p>Get personalized outfit suggestions based on your body type, style preferences, and occasion.</p>
+                <a href="outfitrecommendtion.html" class="click-here">Click here</a>
+                <script src="outfitrecommendation.js" defer></script>
+
+            </div>
+        </div>
+        <div class="service-block">
+            <img src="services_fashion_Quest.png" alt="Interactive games">
+            <h2>Personalized Recommendations</h2>
+            <div class="service-description">
+                <p>Bored with tedious fashion stuff ? Let us have some fun with this interactive game.</p>
+                <a href="game.html" class="click-here">Click here to play</a>
+                <script src="fashion-quest.js" defer></script>
+            </div>
+        </div>
+        <div class="service-block">
+            <img src="services_wardrobe_management.png" alt="Wardrobe Management">
+            <h2>Wardrobe Management</h2>
+            <div class="service-description">
+                <p>Easily save your favorite outfits and manage your virtual wardrobe with our intuitive interface.</p>
+                <a href="wardrobemanagement.html" class="click-here">Click here for seasonal management</a>
+                <script src="wardrobemanagement.js" defer></script>
+            </div>
+        </div>
+        <div class="service-block">
+            <img src="services_shopping_integration.png" alt="Shopping Integration">
+            <h2>Shopping Integration</h2>
+            <div class="service-description">
+                <p>Seamlessly purchase recommended items through links to your favorite stores right from our website.</p>
+                <a href="shoppingintegration.html" class="click-here">Click here for seasonal management</a>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 GLAM GUIDE - All rights reserved</p>
+    </footer>
+    <script src="services.js" defer></script>
+</body>
+</html>

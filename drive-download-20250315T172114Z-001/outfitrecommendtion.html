@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Guide - Outfit Recommendations</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4efef;
+            color: #444;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0a0a0a;
+            margin-top: 50px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #0c0c0c;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d62839;
+        }
+
+        #outfit-results {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        #outfit-results h2 {
+            font-size: 1.8rem;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .outfit {
+            background-color: #f8f0f2;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: calc(33% - 20px);
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .outfit img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .outfit {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .outfit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Glam Guide Recommendations</h1>
+
+        <form id="outfit-form">
+            <label for="body-type">Select Your Body Type:</label>
+            <select id="body-type" name="body-type">
+                <option value="all">All Body Types</option>
+                <option value="apple">Apple</option>
+                <option value="pear">Pear</option>
+                <option value="hourglass">Hourglass</option>
+                <option value="rectangle">Rectangle</option>
+            </select>
+
+            <label for="style-preference">Select Your Preferred Style:</label>
+            <select id="style-preference" name="style-preference">
+                <option value="all">All Styles</option>
+                <option value="casual">Casual</option>
+                <option value="formal">Formal</option>
+                <option value="sporty">Sporty</option>
+                <option value="boho">Boho</option>
+                <option value="chic">Chic</option>
+            </select>
+
+            <label for="occasion">Occasion:</label>
+            <select id="occasion" name="occasion">
+                <option value="all">All Occasions</option>
+                <option value="work">Work</option>
+                <option value="party">Party</option>
+                <option value="wedding">Wedding</option>
+                <option value="casual">Casual</option>
+            </select>
+
+            <button type="submit">Find My Look</button>
+        </form>
+
+        <div id="outfit-results">
+            <!-- Recommended outfits will appear here -->
+        </div>
+    </div>
+
+    <script>
+        const outfitsDatabase = {
+            apple: {
+                casual: {
+                    work: [{ outfit: "V-neck blouse + High-waisted straight-leg trousers (dark color) + Pointed-toe flats", image: "Apple Casual Work.jpg" }],
+                    party: [{ outfit: " wrap dress with ruching (bold color) + strappy sandals + statement earrings.", image:"Apple casual Party.jpg"}],
+                    wedding: [{ outfit: " empire waist maxi dress + nude pumps + delicate bracelet", image: "Apple Casual wedding.jpg" }],
+                    casual: [{ outfit: " striped tshirt  + straight fit jeans + sneakers", image: "Apple Casual Casual.jpg" }]
+                    
+                },
+                formal: {
+                    wedding: [{ outfit: "Fit-and-flare midi dress + dainty earrings + matching clutch + heels", image: "Apple formal wedding.jpg" }],
+                    work: [{ outfit: "Button-up blouse with vertical stripes + high waisted wide leg pants + classic pumps + sleek watch", image: "Apple work formal.jpg" }],
+                    party: [{ outfit: "Sleeveless midi dress + chic clutch + heels",image: "Apple formal party.jpg" }],
+                    casual: [{ outfit: "Fitted knitwear sweater + pleated skirt + block heel ankle boots + stud earrings", image: "Apple Formal casual.jpg" }]
+                    
+                },
+                sporty: {
+                    work: [{ outfit: "Polo tshirt + high waisted jeans + sleek, minimalist sneakers", image: "Apple sporty work.jpg" }],
+                    party: [{ outfit: "Crop studded top + pleated skirt + chunky sneakers", image: "Apple Sporty party.jpg" }],
+                    wedding: [{ outfit: "Wrap up dress + white block heels", image: "apple sporty wedding.jpg" }],
+                    casual: [{ outfit: "Zip-up track jacket + high waisted joggers + running shoes + baseball cap", image: "apple sporty casual.jpg" }]
+                    
+                },
+                chic: {
+                    wedding: [{ outfit: "Midi dress with an empire waist + embellished heels + pearl drop earrings + clutch", image: "apple chic wedding.jpg" }],
+                    work: [{ outfit: "Silky blouse with a wrap detail + pencil skirt + pointed-toe pumps + structured tote bag", image: "Apple chic work.jpg" }],
+                    party: [{ outfit: "knee length wrap dress + Strappy heels + beaded clutch", image: "Apple chic party.jpg" }],
+                    casual: [{ outfit: "flowy blouse with lace + high waisted jeans + ballet flats", image: "apple chic casual.jpg" }],
+                    
+                },
+                boho: {
+                    
+                    work: [{ outfit: "sleeveless top + hoop earrings + white straight leg jeans + loafers + sleek watch + sleek bag", image: "apple boho work.jpg" }],
+                    party: [{ outfit: "flowy dress with floral prints + suede boots + stacked bangles", image: "apple boho party.jpg" }],
+                    wedding: [{ outfit: "lace empire waist gown + metallic sandals + fancy clutch + gemstone drop earrings", image: "apple Boho wedding.jpg" }],
+                    casual: [{ outfit: "embroidered blouse + high waisted jeans + flat leather sandals + beaded bracelets", image: "Apple boho casual.jpg" }]
+
+            },
+            },
+        pear: {
+            casual: {
+                work: [{ outfit: "Structured blouse with ruffles + wide leg trousers + pointed toe flats + bold necklace", image: "Pear casual work.jpg" }],
+                party: [{ outfit: "Fit and flare dress + block heel sandals + statement earrings + small clutch", image: "pear casual party.jpg" }],
+                wedding: [{ outfit: "Empire waist gown + nude heels", image: "Pear casual wedding.jpg" }],
+                casual: [{ outfit: "Casual casual, a line tunic + black jeans", image: "pear casual Casual.jpg" }]
+            },
+            formal: {
+                wedding: [{ outfit: "floral maxi dress + nude colored block heels ", image: "Pear formal wedding.jpg" }],
+                work: [{ outfit: " button-down shirt with puff sleeves + high-waisted tailored trousers", image: "" }],
+                party: [{ outfit: "fit and flare black midi dress + black strappy heels", image: "Pear formal party.jpg" }],
+                casual: [{ outfit: "floral maxi dress + nude colored block heels", image: "Pear formal casual.jpg" }]
+            },
+            sporty: {
+                work: [{ outfit: "tapered trousers + low profile sneakers", image: "Pear sporty work.jpg" }],
+                party: [{ outfit: "bodysuit + tailored trousers + platform sneakers", image: "Pear sporty party.jpg" }],
+                wedding: [{ outfit: "flowy midi dress with a gold detailed belt", image: "Peae sporty wedding.jpg" }],
+                casual: [{ outfit: "loose fitted graphic tee + flared leggings", image: "Pear sporty casual.jpg" }]
+                
+            },
+            chic: {
+                wedding: [{ outfit: "empire waist gown with delicate floral embroidery", image: "Pear chic wedding.jpg" }],
+                work: [{ outfit: "peplum top + tailored biscuits", image: "Pear chic Work.jpg" }],
+                party: [{ outfit: "mini dress + sparkly mules", image: "Pear chic party.jpg" }],
+                casual: [{ outfit: "flowy blouse + satin skirt", image: "Pear chic casual.jpg" }]
+            },
+            boho: {
+                
+                work: [{ outfit: "peasant top + denim skirt", image: "Pear boho work.jpg" }],
+                party: [{ outfit: " tiered maxi dress with flutter sleeves", image: "Pear boho party.jpg" }],
+                wedding: [{ outfit: "empire waist gown", image: "Pear boho wedding.jpg" }],
+                casual: [{ outfit: "flowy top with balloon sleeves + black trousers", image: "Pear, casual,boho.jpg" }]
+                
+            },
+        },
+        hourglass: {
+                casual: {
+                    work: [{ outfit: "tailored single Breasted Blazer", image: "Hourglass casual work.png" }],
+                    party: [{ outfit: "wrap Dresses", image: "Hourglass casual Party.png" }],
+                    wedding: [{ outfit: "Plunging V neck Lace Bridal dresses", image: "hourglass casual wedding.png" }],
+                    casual: [{ outfit: "high waisted flared trouser", image: "Hourglass casual casual.png" }],
+                    
+                },
+                formal: {
+                    wedding: [{ outfit: "Bateau A line dresses", image: "Hourglass formal wedding.png" }],
+                    work: [{ outfit: "straight Pants + heels + coat + shirt top", image: "Hourglass formal work.png" }],
+                    party: [{ outfit: "Square- neckfit and flaredresses", image: "Hourglass formal party.png" }],
+                    casual: [{ outfit: " v - neck jumpsuit", image: "Hourglass formal casual.png" }],
+                    
+                },
+                sporty: {
+                    work: [{ outfit: " straight pants + full sleeves top + oversize coat", image: "Hourglass sporty work.png" }],
+                    party: [{ outfit: "bell bottom pant + v- neck top + a sling bag", image: "Hourglass sporty party.png" }],
+                    wedding: [{ outfit: " Belled Dresses ", image: "Hourglass sporty wedding.png" }],
+                    casual: [{ outfit: "oversize pants + shoes + oversize top with v- neck", image: "Hourglass sporty casual.png" }],
+                    
+                },
+                chic: {
+                    wedding: [{ outfit: "Mermaid Dresses", image: "Hourglass chic wedding.png" }],
+                    work: [{ outfit: " Belled Jumpsuit", image: "hourglass chic work.png" }],
+                    party: [{ outfit: "wrap Dresses", image: "hourglass chic party.png" }],
+                    casual: [{ outfit: "Baggy trousers + shirt type top + sling bag", image: "Hourglass chic casual.png" }],
+                    
+                },
+                boho: {
+                    
+                    work: [{ outfit: "V-neck top + Straight pants + cross neck coat", image: "hourglass boho work.png" }],
+                    party: [{ outfit: "cross v-neck top + baggy pants + pencil heels", image: "houglass boho party.png" }],
+                    wedding: [{ outfit: "Form fitting dresses", image: "Hourglass boho wedding.png" }],
+                    casual: [{ outfit: "v-neck top + bell bottom jeans + heels", image: "Hourglass boho casual.png" }]
+                    
+            }
+        
+        },
+    rectangle: {
+        casual: {
+            work: [{ outfit: "oversize full sleeves top + boyfriend jeans", image: "rectangle casual work.png" }],
+            party: [{ outfit: "Flowy Top + A-line Skirt", image: "recatngle casual party.png" }],
+            wedding: [{ outfit: "sweetheart neck ball Gown", image: "recatangle casual wedding.png" }],
+            casual: [{ outfit: "Polo tshirt + high waisted jeans + sleek, minimalist sneakers", image: "rectangle casual casual.png" }],
+            
+        },
+        formal: {
+            wedding: [{ outfit: "Frilled gown", image: "Rectangle formal wedding.png" }],
+            work: [{ outfit: "Asymmetric Bem skirts", image: "Rectangle formal work.png" }],
+            party: [{ outfit: "square neck middi dress", image: "Rectangle formal party.png" }],
+            casual: [{ outfit: "shirt type Top + Belled skirts", image: "Rectangle formal casual.png" }],
+            
+                        
+        },
+        sporty: {
+            work: [{ outfit: "straight pents + pencil heels + close neck tshirt type", image: "Rectangle sporty work.png" }],
+            party: [{ outfit: " square neck straight dress", image: "Rectangle sporty party.png" }],
+            wedding: [{ outfit: "straight lehenga with a sharara touch", image: "Rectangle sporty wedding.png" }],
+            casual: [{ outfit: "Straight pants + closed neck top with sling bag ", image: "Rectangle sporty casual.png" }],
+            
+        },
+        chic: {
+            work: [{ outfit: "shirt + coat + bell bottom pants + flats ", image: "Rectangle chic work.png" }],
+            wedding: [{ outfit: " shoulderless top + with frilled skirts ", image: "Rectangel chic wedding.png" }],
+            party: [{ outfit: "straight one piece dress", image: "rectangle chic party.png" }],
+            casual: [{ outfit: "jacket + shirt + straight pants ", image: "Rectangle chic casual.png" }],
+            
+        },
+        boho: {
+            work: [{ outfit: "coat+straight oversize pants with bag and heels", image: "Rectangle Boho work.png" }],
+            party: [{ outfit: "Straight pants+ bag + full shirt type oversized top", image: "rectangle boho party.png" }],
+            wedding: [{ outfit: "Queen Anne Tulle bridal Gown", image: "Rectangle boho wedding.png" }],
+            casual: [{ outfit: "straight sleeveless one piece + short jacket + bag + shoes ", image: "Rectangle boho casual.png" }]
+            
+    }
+
+
+},
+
+}
+        document.getElementById("outfit-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const bodyType = document.getElementById("body-type").value;
+            const style = document.getElementById("style-preference").value;
+            const occasion = document.getElementById("occasion").value;
+
+            const resultDiv = document.getElementById("outfit-results");
+            resultDiv.innerHTML = "<h2>Recommended Outfits:</h2>";
+
+            const combinations = generateCombinations(bodyType, style, occasion);
+
+            if (combinations.length) {
+                combinations.forEach(combo => {
+                    resultDiv.innerHTML += `
+                        <div class="outfit">
+                            <img src="${combo.image}" alt="${combo.outfit}">
+                            <p>${combo.outfit}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                resultDiv.innerHTML += `<p>Sorry, no outfits found for your selection.</p>`;
+            }
+        });
+
+        function generateCombinations(selectedBodyType, selectedStyle, selectedOccasion) {
+            const combinations = [];
+
+            Object.keys(outfitsDatabase).forEach(bodyType => {
+                if (selectedBodyType !== "all" && selectedBodyType !== bodyType) return;
+
+                Object.keys(outfitsDatabase[bodyType]).forEach(style => {
+                    if (selectedStyle !== "all" && selectedStyle !== style) return;
+
+                    Object.keys(outfitsDatabase[bodyType][style]).forEach(occasion => {
+                        if (selectedOccasion !== "all" && selectedOccasion !== occasion) return;
+
+                        combinations.push(...outfitsDatabase[bodyType][style][occasion]);
+                    });
+                });
+            });
+
+            return combinations;
+        }
+    </script>
+    <script src="outfitrecommendation.js" defer></script>
+</body>
+</html>
