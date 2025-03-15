@@ -1,0 +1,10 @@
+.env
+node_modules/
+build/
+dist/
+*.log
+*.swp
+*~
+*.pem
+.DS_Store
+Thumbs.db
