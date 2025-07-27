@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Response data:', data);
             
             if (response.ok) {
-                alert('Signup successful! Please log in.');
-                window.location.href = 'login.html';
+                alert('Signup successful! Welcome to GlamGuide!');
+                window.location.href = 'index.html';
             } else {
                 alert(data.message || 'Signup failed.');
             }
