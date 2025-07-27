@@ -58,41 +58,62 @@
 
         .services {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 20px; 
-            padding: 20px;
-            flex: 1; 
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin: 40px auto;
+            max-width: 900px;
+            justify-items: center;
         }
-
+        @media (max-width: 900px) {
+            .services {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+        }
         .service-block {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            width: 100%; 
-            height: 300px; 
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            min-height: 220px;
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 36px 28px 32px 28px;
             position: relative;
-            overflow: hidden;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1.5px solid #2d2f36;
+        }
+        .service-block:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.18);
+            border-color: #5e72eb;
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 18px;
+            color: #5e72eb;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            flex-direction: column; 
         }
-        .service-block img {
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; /* Ensures the image fills the box while maintaining aspect ratio */
-            transition: opacity 0.3s;
-        }
-        
-
         .service-block h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0 0 0.5em 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .service-desc {
+            color: #e0e0e0;
+            font-size: 1.05rem;
             margin: 0;
-            color: #f7fcf7;
-            z-index: 1;
-            transition: opacity 0.3s; 
+            font-weight: 400;
+            text-align: center;
         }
 
         .service-description {
@@ -157,43 +178,26 @@
     </header>
 
     <section class="services">
-        <div class="service-block">
-            <img src="services_outfit_generator.png" alt="Outfit Generator">
+        <a href="outfitrecommendtion.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">👗</div>
             <h2>Outfit Generator</h2>
-            <div class="service-description">
-                <p>Get personalized outfit suggestions based on your body type, style preferences, and occasion.</p>
-                <a href="outfitrecommendtion.html" class="click-here">Click here</a>
-                <script src="outfitrecommendation.js" defer></script>
-
-            </div>
-        </div>
-        <div class="service-block">
-            <img src="services_fashion_Quest.png" alt="Interactive games">
+            <p class="service-desc">Get personalized outfit suggestions based on your body type, style preferences, and occasion.</p>
+        </div></a>
+        <a href="game.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">🎮</div>
             <h2>Personalized Recommendations</h2>
-            <div class="service-description">
-                <p>Bored with tedious fashion stuff ? Let us have some fun with this interactive game.</p>
-                <a href="game.html" class="click-here">Click here to play</a>
-                <script src="fashion-quest.js" defer></script>
-            </div>
-        </div>
-        <div class="service-block">
-            <img src="services_wardrobe_management.png" alt="Wardrobe Management">
+            <p class="service-desc">Bored with tedious fashion stuff? Let us have some fun with this interactive game.</p>
+        </div></a>
+        <a href="wardrobemanagement.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">👚</div>
             <h2>Wardrobe Management</h2>
-            <div class="service-description">
-                <p>Easily save your favorite outfits and manage your virtual wardrobe with our intuitive interface.</p>
-                <a href="wardrobemanagement.html" class="click-here">Click here for seasonal management</a>
-                <script src="wardrobemanagement.js" defer></script>
-            </div>
-        </div>
-        <div class="service-block">
-            <img src="services_shopping_integration.png" alt="Shopping Integration">
+            <p class="service-desc">Easily save your favorite outfits and manage your virtual wardrobe with our intuitive interface.</p>
+        </div></a>
+        <a href="shoppingintegration.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">🛒</div>
             <h2>Shopping Integration</h2>
-            <div class="service-description">
-                <p>Seamlessly purchase recommended items through links to your favorite stores right from our website.</p>
-                <a href="shoppingintegration.html" class="click-here">Click here for seasonal management</a>
-                
-            </div>
-        </div>
+            <p class="service-desc">Seamlessly purchase recommended items through links to your favorite stores right from our website.</p>
+        </div></a>
     </section>
 
     <footer>
