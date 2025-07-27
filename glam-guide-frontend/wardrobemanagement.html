@@ -312,7 +312,7 @@
 
     // Function to show outfits by season
     function showCategory(season) {
-        fetch(`http://localhost:5000/users`)  // Fetch all outfits
+        fetch(`https://glam-guide-backend.onrender.com/users`)  // Fetch all outfits
             .then(response => response.json())
             .then(outfits => {
                 // Filter outfits by selected season
@@ -347,7 +347,7 @@
         };
 
         // Add new outfit to the server
-        fetch('http://localhost:5000/users', {
+        fetch('https://glam-guide-backend.onrender.com/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -359,7 +359,7 @@
             alert(result.message);  // Display success message
 
             // After successfully adding the outfit, fetch all outfits and update the table
-            fetch('http://localhost:5000/users')
+            fetch('https://glam-guide-backend.onrender.com/users')
                 .then(response => response.json())
                 .then(outfits => {
                     displayOutfits(outfits);  // Display all outfits in the wardrobe and table
@@ -371,7 +371,7 @@
 
     // Load the wardrobe with all outfits by default on page load
     document.addEventListener('DOMContentLoaded', () => {
-        fetch('http://localhost:5000/users')
+        fetch('https://glam-guide-backend.onrender.com/users')
             .then(response => response.json())
             .then(outfits => {
                 displayOutfits(outfits);  // Display all outfits in the wardrobe and table on initial load

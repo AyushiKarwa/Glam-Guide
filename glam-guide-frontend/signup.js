@@ -22,7 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/signup', {
+            console.log('Sending signup request to:', 'https://glam-guide-backend.onrender.com/signup');
+            console.log('Request data:', { name, email, password: '***' });
+            
+            const response = await fetch('https://glam-guide-backend.onrender.com/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,7 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ name, email, password }),
             });
 
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
             const data = await response.json();
+            console.log('Response data:', data);
+            
             if (response.ok) {
                 alert('Signup successful! Please log in.');
                 window.location.href = 'login.html';
@@ -38,8 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(data.message || 'Signup failed.');
             }
         } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to connect to the server.');
+            console.error('Error details:', error);
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
+            alert('Failed to connect to the server. Check console for details.');
         }
     });
 

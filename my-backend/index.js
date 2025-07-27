@@ -51,10 +51,101 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+// Define Schema for Authentication Users
+const authUserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+});
 
 // Create a Model based on the User Schema
 const User = mongoose.model('User', userSchema);
+const AuthUser = mongoose.model('AuthUser', authUserSchema);
 
+// Authentication Routes
+app.post('/signup', async (req, res) => {
+    const { name, email, password } = req.body;
+    
+    try {
+        const existingUser = await AuthUser.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+        
+        const newAuthUser = new AuthUser({
+            name,
+            email,
+            password // In production, you should hash this password
+        });
+        
+        await newAuthUser.save();
+        res.status(200).json({ message: 'Signup successful! Please log in.' });
+    } catch (err) {
+        res.status(500).json({ message: 'Error during signup', error: err });
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    
+    try {
+        const user = await AuthUser.findOne({ email, password });
+        if (user) {
+            res.status(200).json({ message: 'Login successful', token: 'dummy-token' });
+        } else {
+            res.status(401).json({ message: 'Invalid credentials' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error during login', error: err });
+    }
+});
+
+app.post('/register', async (req, res) => {
+    const { email, password } = req.body;
+    
+    try {
+        const existingUser = await AuthUser.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+        
+        const newAuthUser = new AuthUser({
+            name: email.split('@')[0], // Use email prefix as name
+            email,
+            password
+        });
+        
+        await newAuthUser.save();
+        res.status(200).json({ message: 'Registration successful', token: 'dummy-token' });
+    } catch (err) {
+        res.status(500).json({ message: 'Error during registration', error: err });
+    }
+});
+
+app.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
+    
+    try {
+        const user = await AuthUser.findOne({ email });
+        if (user) {
+            res.status(200).json({ message: 'A password reset link has been sent to your email.' });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error during password reset', error: err });
+    }
+});
 
 // Route to save user data (POST)
 app.post('/users', async (req, res) => {

@@ -233,7 +233,7 @@
 
         try {
             // First try to login
-            const loginResponse = await fetch('http://localhost:8001/login', {
+            const loginResponse = await fetch('https://glam-guide-backend.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -250,7 +250,7 @@
                 window.location.href = 'home.html';
             } else if (loginResponse.status === 401) {
                 // If login fails, try to register
-                const registerResponse = await fetch('http://localhost:8001/register', {
+                const registerResponse = await fetch('https://glam-guide-backend.onrender.com/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
