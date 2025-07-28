@@ -129,19 +129,110 @@
         .footer p {
             font-size: 0.9rem;
         }
+
+        /* Hamburger menu styles */
+        .nav-menu {
+          position: fixed;
+          top: 18px;
+          left: 18px;
+          z-index: 2000;
+        }
+        .hamburger {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background: #333;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          align-items: center;
+          gap: 5px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+        .hamburger span {
+          display: block;
+          width: 24px;
+          height: 3px;
+          background: #fff;
+          border-radius: 2px;
+          transition: all 0.3s;
+        }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 48px;
+          left: 0;
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 4px 16px rgba(44,48,60,0.12);
+          min-width: 140px;
+          padding: 10px 0;
+        }
+        .nav-links a {
+          color: #333;
+          text-decoration: none;
+          padding: 12px 24px;
+          font-size: 1.08rem;
+          font-weight: 500;
+          transition: background 0.2s;
+        }
+        .nav-links a:hover {
+          background: #f4f6f9;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        @media (max-width: 700px) {
+          header {
+            padding: 12px 4px;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          header h1 {
+            font-size: 1.5rem;
+          }
+          .about {
+            padding: 10px;
+            margin: 18px auto;
+          }
+          .about h2 {
+            font-size: 1.3rem;
+          }
+          .about p {
+            font-size: 1rem;
+          }
+        }
+        @media (max-width: 400px) {
+          .nav-links a {
+            font-size: 0.98rem;
+            padding: 10px 12px;
+          }
+        }
     </style>
 </head>
 <body>
+    <!-- Hamburger Menu -->
+    <nav class="nav-menu">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="home.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About Us</a>
+      </div>
+    </nav>
+
     <header>
         <h1>GLAM GUIDE</h1>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html">Login</a>
-            <a href="about.html">About Us</a>
-        </nav>
     </header>
 
     <section class="about">
@@ -156,5 +247,19 @@
         <p>© 2024 GLAM GUIDE - All rights reserved</p>
     </footer>
     <script src="about.js" defer></script>
+    <script>
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburgerBtn.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+    // Optional: close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('open');
+      }
+    });
+    </script>
 </body>
 </html>

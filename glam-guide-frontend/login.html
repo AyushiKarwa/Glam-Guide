@@ -162,7 +162,7 @@
     <header>
         <h1>GLAM GUIDE</h1>
         <nav class="nav-links">
-            <a href="index.html">Home</a>
+            <a href="home.html">Home</a>
             <a href="services.html">Services</a>
             <a href="blog.html">Blog</a>
             <a href="contact.html">Contact</a>
@@ -247,7 +247,7 @@
                 // Login successful
                 localStorage.setItem('authToken', loginData.token);
                 alert('Login successful!');
-                window.location.href = 'index.html';
+                window.location.href = 'home.html';
             } else if (loginResponse.status === 401) {
                 // If login fails, try to register
                 const registerResponse = await fetch('https://glam-guide-backend.onrender.com/register', {
@@ -263,7 +263,7 @@
                 if (registerResponse.ok) {
                     localStorage.setItem('authToken', registerData.token);
                     alert('Registration successful! You are now logged in.');
-                    window.location.href = 'index.html';
+                    window.location.href = 'home.html';
                 } else {
                     alert(registerData.message || 'Registration failed');
                 }

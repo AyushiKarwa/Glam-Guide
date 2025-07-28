@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (response.ok) {
                 alert('Signup successful! Welcome to GlamGuide!');
-                window.location.href = 'index.html';
+                window.location.href = 'home.html';
             } else {
                 alert(data.message || 'Signup failed.');
             }

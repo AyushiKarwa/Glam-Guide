@@ -191,9 +191,134 @@
             font-size: 1.08rem;
             letter-spacing: 0.5px;
         }
+        /* Hamburger menu styles */
+        .nav-menu {
+          position: fixed;
+          top: 18px;
+          left: 18px;
+          z-index: 2000;
+        }
+        .hamburger {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background: #333;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          align-items: center;
+          gap: 5px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+        .hamburger span {
+          display: block;
+          width: 24px;
+          height: 3px;
+          background: #fff;
+          border-radius: 2px;
+          transition: all 0.3s;
+        }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 48px;
+          left: 0;
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 4px 16px rgba(44,48,60,0.12);
+          min-width: 140px;
+          padding: 10px 0;
+        }
+        .nav-links a {
+          color: #333;
+          text-decoration: none;
+          padding: 12px 24px;
+          font-size: 1.08rem;
+          font-weight: 500;
+          transition: background 0.2s;
+        }
+        .nav-links a:hover {
+          background: #f4f6f9;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        @media (max-width: 700px) {
+          header {
+            padding: 18px 8px;
+            margin-top: 18px;
+          }
+          header h1 {
+            font-size: 1.5rem;
+          }
+          header p {
+            font-size: 1rem;
+          }
+          .category-btns {
+            flex-direction: column;
+            gap: 10px;
+            margin: 18px 0;
+          }
+          .category-btns button {
+            padding: 10px 0;
+            font-size: 1rem;
+          }
+          .upload-section {
+            padding: 18px 8px;
+          }
+          .upload-section h2 {
+            font-size: 1.2rem;
+          }
+          .wardrobe {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+          .outfit-card {
+            padding: 12px 6px;
+          }
+          #outfit-table th, #outfit-table td {
+            padding: 6px;
+            font-size: 0.95rem;
+          }
+          .table-section {
+            margin-top: 24px;
+          }
+          .back-icon {
+            top: 12px;
+            right: 12px;
+            font-size: 0.95rem;
+            padding: 6px 12px 6px 8px;
+          }
+        }
+        @media (max-width: 400px) {
+          .upload-section input, .upload-section select {
+            font-size: 0.95rem;
+          }
+          .nav-links a {
+            font-size: 0.98rem;
+            padding: 10px 12px;
+          }
+        }
     </style>
 </head>
 <body>
+    <!-- Hamburger Menu -->
+    <nav class="nav-menu">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
     <a href="services.html" class="back-icon" title="Back to Services">
       <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
       <span>Back</span>
@@ -265,6 +390,7 @@
                 <th>Color</th>
                 <th>Season</th>
                 <th>Material</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -295,6 +421,7 @@
                 <p>Color: ${outfit.color}</p>
                 <p>Material: ${outfit.material}</p>
                 <p>Season: ${outfit.season}</p>
+                <button style="margin-top:10px;background:#dc3545;color:#fff;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;" onclick="deleteOutfit('${outfit._id}')">Delete</button>
             `;
             wardrobe.appendChild(outfitCard);
 
@@ -305,6 +432,7 @@
                 <td>${outfit.color}</td>
                 <td>${outfit.season}</td>
                 <td>${outfit.material}</td>
+                <td><button style="background:#dc3545;color:#fff;border:none;padding:6px 12px;border-radius:5px;cursor:pointer;" onclick="deleteOutfit('${outfit._id}')">Delete</button></td>
             `;
             tableBody.appendChild(row);
         });
@@ -379,6 +507,41 @@
             .catch(error => console.error('Error fetching outfits:', error));
     });
 
+    // Add this function to handle deletion
+    function deleteOutfit(id) {
+        if (!confirm('Are you sure you want to delete this outfit?')) return;
+        fetch(`https://glam-guide-backend.onrender.com/users/${id}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert(result.message || 'Outfit deleted!');
+            // Refresh the wardrobe
+            fetch('https://glam-guide-backend.onrender.com/users')
+                .then(response => response.json())
+                .then(outfits => {
+                    displayOutfits(outfits);
+                })
+                .catch(error => console.error('Error fetching updated outfits:', error));
+        })
+        .catch(error => {
+            alert('Error deleting outfit.');
+            console.error('Error deleting outfit:', error);
+        });
+    }
+
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburgerBtn.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+    // Optional: close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('open');
+      }
+    });
 
 </script>
 
